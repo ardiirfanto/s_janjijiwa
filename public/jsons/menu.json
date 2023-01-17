@@ -1,0 +1,25 @@
+[
+    {
+        "menu": "Halaman Utama",
+        "icon": "icon-home",
+        "route": "home",
+        "index": "home",
+        "tipe": "1"
+    },
+    {
+        "menu": "Kelola Data",
+        "icon": "icon-home",
+        "tipe": "2",
+        "index": "data",
+        "sub": [
+            {
+                "sub-menu":"Data Training",
+                "sub-route":"data.training"
+            },
+            {
+                "sub-menu":"Kata Dihilangkan",
+                "sub-route":"data.stopwords"
+            }
+        ]
+    }
+]
