@@ -9,6 +9,12 @@ class KataDihilangkan extends Model
 {
     use HasFactory;
 
+    protected $table = "kata_dihilangkan";
+
     public $timestamp = false;
+
+    protected $fillable = [
+        "kata"
+    ];
 
 }

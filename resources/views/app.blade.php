@@ -15,7 +15,7 @@
     <link href="{{ asset('assets/css/metismenu.min.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('assets/css/icons.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet" type="text/css">
-
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
@@ -62,8 +62,7 @@
             <!-- content -->
 
             <footer class="footer">
-                © 2019 - 2020 Stexo <span class="d-none d-sm-inline-block"> - Crafted with <i
-                        class="mdi mdi-heart text-danger"></i> by Themesdesign</span>.
+                © 2023 <span class="d-none d-sm-inline-block"> Janji Jiwa </span>.
             </footer>
 
         </div>
@@ -73,18 +72,18 @@
 
     </div>
     <!-- END wrapper -->
-
     <!-- jQuery  -->
     <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
     <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('assets/js/metismenu.min.js') }}"></script>
     <script src="{{ asset('assets/js/jquery.slimscroll.js') }}"></script>
     <script src="{{ asset('assets/js/waves.min.js') }}"></script>
-    <script src="{{ asset('assets/pages/dashboard.init.js') }}"></script>
 
     <!-- App js -->
     <script src="{{ asset('assets/js/app.js') }}"></script>
+    @include('sweetalert::alert')
 
+    @stack('page-js')
 </body>
 
 </html>

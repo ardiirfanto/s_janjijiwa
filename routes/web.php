@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\KataDihilangkanController;
+use App\Http\Controllers\TestingDetilController;
 use App\Http\Controllers\TrainingController;
 use Illuminate\Support\Facades\Route;
 
@@ -28,13 +29,15 @@ Route::middleware(['auth'])->group(function () {
             Route::post('store', [KataDihilangkanController::class, 'store'])->name('data.stopwords.store');
             Route::post('import', [KataDihilangkanController::class, 'import'])->name('data.stopwords.import');
             Route::get('clear', [KataDihilangkanController::class, 'clear'])->name('data.stopwords.clear');
-            Route::get('delete/{$id}', [KataDihilangkanController::class, 'delete'])->name('data.stopwords.delete');
+            Route::get('delete/{id}', [KataDihilangkanController::class, 'delete'])->name('data.stopwords.delete');
         });
     });
 
     Route::prefix('uji')->group(function () {
 
     });
+
+    Route::get('tes',[TestingDetilController::class,'getdata']);
 
     // Last
     Route::get('logout', [AuthController::class, 'logout'])->name('logout');
