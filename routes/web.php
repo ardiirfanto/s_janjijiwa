@@ -22,7 +22,7 @@ Route::middleware(['auth'])->group(function () {
             Route::post('store', [TrainingController::class, 'store'])->name('data.training.store');
             Route::post('import', [TrainingController::class, 'import'])->name('data.training.import');
             Route::get('clear', [TrainingController::class, 'clear'])->name('data.training.clear');
-            Route::get('delete/{$id}', [TrainingController::class, 'delete'])->name('data.training.delete');
+            Route::get('delete/{id}', [TrainingController::class, 'delete'])->name('data.training.delete');
         });
         Route::prefix('stopwords')->group(function () {
             Route::get('/', [KataDihilangkanController::class, 'index'])->name('data.stopwords');

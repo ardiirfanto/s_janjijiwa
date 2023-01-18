@@ -195,6 +195,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         RealRashid\SweetAlert\SweetAlertServiceProvider::class,
+        Maatwebsite\Excel\ExcelServiceProvider::class,
     ],
 
     /*
@@ -250,6 +251,7 @@ return [
         'Alert' => RealRashid\SweetAlert\Facades\Alert::class,
         'SideMenu' => App\Services\MenuService::class,
         'TwitterApi' => App\Services\TwitterApiService::class,
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
     ])->toArray(),
 
 ];
