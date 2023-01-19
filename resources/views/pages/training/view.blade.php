@@ -77,7 +77,14 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="mt-0 header-title">Data Training</h4>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h4 class="mt-0 header-title">Data Training</h4>
+                        </div>
+                        <div class="col-md-6">
+                            <button type="button" onclick="clearData('{{ route('data.training.clear')}}')" class="btn btn-outline-danger btn-sm" style="float: right">Bersihkan Data</button>
+                        </div>
+                    </div>
                     <br>
                     <table class="table table-bordered dt-responsive nowrap">
                         <thead>
@@ -117,6 +124,20 @@
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonText: 'Hapus',
+                cancelButtonText: 'Batalkan'
+            }).then((res) => {
+                if (res.isConfirmed) {
+                    window.location.href = url;
+                }
+            })
+        }
+        function clearData(url) {
+            Swal.fire({
+                title: 'Membersihkan Data',
+                text: 'Membersihkan data akan menghapus semua data yang ada. Lanjutkan?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Bersihkan',
                 cancelButtonText: 'Batalkan'
             }).then((res) => {
                 if (res.isConfirmed) {

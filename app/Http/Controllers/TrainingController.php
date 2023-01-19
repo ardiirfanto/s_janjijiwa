@@ -49,12 +49,13 @@ class TrainingController extends Controller
             $filename = rand() . $file->getClientOriginalName();
             $file->move('docs/excel', $filename);
 
-            $import = Excel::import(new TrainingImport, public_path('/docs/excel' . $filename));
+            $import = Excel::import(new TrainingImport, public_path('/docs/excel/' . $filename));
 
             if (!$import) {
                 alert()->error('Gagal Import');
                 return back();
             }
+
 
             alert()->success('Berhasil Import Data Training');
             return back();
@@ -65,8 +66,24 @@ class TrainingController extends Controller
     }
     function clear()
     {
+        $clear = Training::truncate();
+        if (!$clear) {
+            alert()->error('Gagal Membersihkan');
+            return back();
+        }
+
+        alert()->success('Berhasil Membersihkan');
+        return back();
     }
     function delete($id)
     {
+        $delete = Training::find($id)->delete();
+        if (!$delete) {
+            alert()->error('Gagal Hapus');
+            return back();
+        }
+
+        alert()->success('Berhasil Hapus');
+        return back();
     }
 }

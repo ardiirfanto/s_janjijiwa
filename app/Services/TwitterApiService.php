@@ -4,6 +4,7 @@ namespace App\Services;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Request;
+use stdClass;
 
 class TwitterApiService
 {
@@ -72,6 +73,6 @@ class TwitterApiService
             $array_post[] = $arr;
         }
 
-        return json_encode($array_post, true);
+        return $array_post;
     }
 }

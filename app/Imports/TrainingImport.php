@@ -3,21 +3,20 @@
 namespace App\Imports;
 
 use App\Models\Training;
-use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
+use Illuminate\Support\Collection;
+use Maatwebsite\Excel\Concerns\ToCollection;
 
-class TrainingImport implements ToModel,WithHeadingRow
+class TrainingImport implements ToCollection,WithHeadingRow
 {
-    /**
-     * @param array $row
-     *
-     * @return \Illuminate\Database\Eloquent\Model|null
-     */
-    public function model(array $row)
+    public function collection(Collection $rows)
     {
-        return new Training([
-            'kalimat' => $row['kalimat'],
-            'kategori' => $row['kategori']
-        ]);
+        foreach ($rows as $row)
+        {
+            Training::insert([
+                'kalimat' => $row['kalimat'],
+                'kategori' => $row['kategori']
+            ]);
+        }
     }
 }

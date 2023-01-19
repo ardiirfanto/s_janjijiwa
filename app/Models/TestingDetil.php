@@ -11,4 +11,9 @@ class TestingDetil extends Model
 
     public $timestamp = false;
 
+    protected $fillable =[
+        "testing_id",
+        "post",
+        "username_twitter"
+    ];
 }

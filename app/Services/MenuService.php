@@ -37,14 +37,14 @@ class MenuService
                 "tipe" => "2",
                 "index" => "uji",
                 "sub" => [
-                    // [
-                    //     "sub-menu" => "Pengujian",
-                    //     "sub-route" => "uji.testing"
-                    // ],
-                    // [
-                    //     "sub-menu" => "Proses Pengujian",
-                    //     "sub-route" => "uji.proses"
-                    // ]
+                    [
+                        "sub-menu" => "Tambah Pengujian",
+                        "sub-route" => "uji.testing"
+                    ],
+                    [
+                        "sub-menu" => "Proses Pengujian",
+                        "sub-route" => "uji.proses"
+                    ]
                 ]
             ],
         ];
