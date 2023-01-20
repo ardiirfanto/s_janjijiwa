@@ -56,7 +56,6 @@ class TrainingController extends Controller
                 return back();
             }
 
-
             alert()->success('Berhasil Import Data Training');
             return back();
         } catch (\Throwable $e) {

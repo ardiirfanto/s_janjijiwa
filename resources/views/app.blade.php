@@ -10,6 +10,11 @@
     <meta content="Themesdesign" name="author" />
     <link rel="shortcut icon" href="{{ asset('assets/images/favicon.ico') }}">
 
+    <!-- DataTables -->
+    <link href="{{ asset('plugins/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('plugins/datatables/buttons.bootstrap4.min.css') }}" rel="stylesheet" type="text/css" />
+    <!-- Responsive datatable examples -->
+    <link href="{{ asset('plugins/datatables/responsive.bootstrap4.min.css') }}" rel="stylesheet" type="text/css" />
 
     <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('assets/css/metismenu.min.css') }}" rel="stylesheet" type="text/css">
@@ -45,7 +50,7 @@
                             </div>
                             <div class="col-sm-6">
                                 <ol class="breadcrumb float-right">
-                                    @yield('breadcumb','')
+                                    @yield('breadcumb', '')
                                 </ol>
                             </div>
                         </div>
@@ -79,11 +84,28 @@
     <script src="{{ asset('assets/js/jquery.slimscroll.js') }}"></script>
     <script src="{{ asset('assets/js/waves.min.js') }}"></script>
 
+    <!-- Required datatable js -->
+    <script src="{{ asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('plugins/datatables/dataTables.bootstrap4.min.js') }}"></script>
+
+    <!-- Responsive examples -->
+    <script src="{{ asset('plugins/datatables/dataTables.responsive.min.js') }}"></script>
+    <script src="{{ asset('plugins/datatables/responsive.bootstrap4.min.js') }}"></script>
+
+    <!-- Datatable init js -->
+    {{-- <script src="{{ asset('assets/pages/datatables.init.js') }}"></script> --}}
+
     <!-- App js -->
     <script src="{{ asset('assets/js/app.js') }}"></script>
     @include('sweetalert::alert')
 
     @stack('page-js')
+
+    <script>
+        $(document).ready(function() {
+            $('.table').DataTable();
+        });
+    </script>
 </body>
 
 </html>

@@ -38,7 +38,7 @@
                 <div class="card-body">
                     <h4 class="mt-0 header-title">Data Kata Yang Dihilangkan</h4>
                     <br>
-                    <table class="table table-bordered dt-responsive nowrap">
+                    <table class="table table-bordered">
                         <thead>
                             <th width="10%">NO</th>
                             <th>KATA</th>

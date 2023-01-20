@@ -50,7 +50,7 @@ Route::middleware(['auth'])->group(function () {
 
         Route::prefix('proses')->group(function () {
             Route::get('/', [HasilController::class, 'index'])->name('uji.proses');
-            Route::get('view/{testing_id}', [HasilController::class, 'view'])->name('uji.proses.view');
+            Route::post('view', [HasilController::class, 'view'])->name('uji.proses.view');
             Route::get('proses/{testing_id}', [HasilController::class, 'proses'])->name('uji.proses.proses');
         });
     });

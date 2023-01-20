@@ -4,7 +4,7 @@
     <div class="topbar-left">
         <a href="{{ route('home') }}" class="logo">
             <span class="logo-light">
-                <i class="mdi mdi-camera-control"></i> JANJI JIWA
+                <i class="mdi mdi-camera-control"></i> NAIVE BAYES
             </span>
             <span class="logo-sm">
                 <i class="mdi mdi-camera-control"></i>

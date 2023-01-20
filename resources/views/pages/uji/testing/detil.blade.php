@@ -51,7 +51,7 @@
                     <div class="card-body">
                         <h4 class="mt-0 header-title">Data Testing</h4>
                         <hr>
-                        <table class="table table-bordered dt-responsive nowrap">
+                        <table class="table table-bordered">
                             <thead>
                                 <th width="10%">NO</th>
                                 <th>POSTINGAN</th>

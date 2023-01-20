@@ -86,7 +86,7 @@
                         </div>
                     </div>
                     <br>
-                    <table class="table table-bordered dt-responsive nowrap">
+                    <table class="table table-bordered">
                         <thead>
                             <th width="10%">NO</th>
                             <th>KALIMAT</th>

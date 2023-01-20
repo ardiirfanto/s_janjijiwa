@@ -1,5 +1,6 @@
 <?php
 
+use App\Services\NaiveBayes;
 use Illuminate\Support\Facades\Facade;
 
 return [
@@ -252,6 +253,7 @@ return [
         'SideMenu' => App\Services\MenuService::class,
         'TwitterApi' => App\Services\TwitterApiService::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+        'NaiveBayesService' => App\Services\NaiveBayesService::class,
     ])->toArray(),
 
 ];
