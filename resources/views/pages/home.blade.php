@@ -7,5 +7,11 @@
 @endsection
 
 @section('content')
-    <h1>Tes</h1>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="alert alert-primary">
+                Selamat Datang di Sistem Informasi Klasifikasi Menggunakan Metode Naive Bayes
+            </div>
+        </div>
+    </div>
 @endsection
