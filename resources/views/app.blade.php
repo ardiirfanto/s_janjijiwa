@@ -95,6 +95,9 @@
     <!-- Datatable init js -->
     {{-- <script src="{{ asset('assets/pages/datatables.init.js') }}"></script> --}}
 
+    <!-- chartjs js -->
+    <script src="{{ asset('plugins/chartjs/chart.min.js') }}"></script>
+
     <!-- App js -->
     <script src="{{ asset('assets/js/app.js') }}"></script>
     @include('sweetalert::alert')

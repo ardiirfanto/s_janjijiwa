@@ -4,8 +4,47 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4973f8a04f46acbef00f528f29c2434f",
+    "content-hash": "6128a0f479b124ab6b2e9843aeb11ea9",
     "packages": [
+        {
+            "name": "amaccis/php-stemmer",
+            "version": "1.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/amaccis/php-stemmer.git",
+                "reference": "6e3c898b43eee684252a35c2fd5f020642c49688"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/amaccis/php-stemmer/zipball/6e3c898b43eee684252a35c2fd5f020642c49688",
+                "reference": "6e3c898b43eee684252a35c2fd5f020642c49688",
+                "shasum": ""
+            },
+            "require": {
+                "ext-ffi": "*",
+                "php": "^7.4 || ^8.0"
+            },
+            "require-dev": {
+                "phpstan/phpstan": "^0.12",
+                "phpunit/phpunit": "^9.5"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Amaccis\\Stemmer\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "A PHP interface to the Snowball stemming algorithms",
+            "support": {
+                "issues": "https://github.com/amaccis/php-stemmer/issues",
+                "source": "https://github.com/amaccis/php-stemmer/tree/1.1.1"
+            },
+            "time": "2021-11-12T07:14:29+00:00"
+        },
         {
             "name": "brick/math",
             "version": "0.10.2",
@@ -3607,6 +3646,66 @@
                 }
             ],
             "time": "2022-05-28T13:28:03+00:00"
+        },
+        {
+            "name": "sastrawi/sastrawi",
+            "version": "v1.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sastrawi/sastrawi.git",
+                "reference": "31fd4261dd4980cc57447f44d1aec4bd69e2abec"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sastrawi/sastrawi/zipball/31fd4261dd4980cc57447f44d1aec4bd69e2abec",
+                "reference": "31fd4261dd4980cc57447f44d1aec4bd69e2abec",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.8.7",
+                "squizlabs/php_codesniffer": "~1.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Sastrawi\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Andy Librian",
+                    "email": "andylibrian@gmail.com",
+                    "homepage": "http://andylibrian.com",
+                    "role": "Lead Developer"
+                }
+            ],
+            "description": "PHP library for stemming Indonesian language (Bahasa Indonesia)",
+            "homepage": "https://github.com/sastrawi/sastrawi",
+            "keywords": [
+                "bahasa",
+                "indonesia",
+                "indonesian",
+                "kata dasar",
+                "root word",
+                "stem"
+            ],
+            "support": {
+                "issues": "https://github.com/sastrawi/sastrawi/issues",
+                "source": "https://github.com/sastrawi/sastrawi"
+            },
+            "time": "2016-10-22T03:19:27+00:00"
         },
         {
             "name": "symfony/console",

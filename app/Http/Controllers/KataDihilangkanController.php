@@ -21,7 +21,7 @@ class KataDihilangkanController extends Controller
     function store(Request $req)
     {
         $store = KataDihilangkan::insert([
-            'kata' => $req->kata
+            'kata' => strtolower($req->kata)
         ]);
 
         if (!$store) {
