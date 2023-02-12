@@ -38,11 +38,15 @@ class MenuService
                 "index" => "uji",
                 "sub" => [
                     [
-                        "sub-menu" => "Tambah Pengujian",
+                        "sub-menu" => "Tambah Pengujian & Scrapping",
                         "sub-route" => "uji.testing"
                     ],
                     [
-                        "sub-menu" => "Proses Pengujian",
+                        "sub-menu" => "Pre-Processing",
+                        "sub-route" => "uji.pre"
+                    ],
+                    [
+                        "sub-menu" => "Klasifikasi",
                         "sub-route" => "uji.proses"
                     ]
                 ]

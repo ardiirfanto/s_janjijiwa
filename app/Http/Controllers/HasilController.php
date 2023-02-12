@@ -31,7 +31,9 @@ class HasilController extends Controller
     {
 
         $testing = Testing::all();
-        $data = TestingDetil::where('testing_id', $req->testing)->get();
+        $testing = Testing::all();
+        $dataset = TestingDetil::where('testing_id', $req->testing)->get();
+        $data = NaiveBayesService::preprocessing($dataset, 1);
         $params = [
             'testing' => $testing,
             'testing_id' => $req->testing,
@@ -134,5 +136,50 @@ class HasilController extends Controller
     {
 
         return Excel::download(new HasilExport($test_id), 'hasil.xlsx');
+    }
+
+    // Pre
+    function pre()
+    {
+        $testing = Testing::all();
+
+        $params = [
+            'testing' => $testing,
+            'data' => null,
+        ];
+
+        return view('pages.uji.pre.view', $params);
+    }
+    function pre_view(Request $req)
+    {
+
+        $testing = Testing::all();
+        $data = TestingDetil::where('testing_id', $req->testing)->get();
+        $params = [
+            'testing' => $testing,
+            'testing_id' => $req->testing,
+            'data' => $data
+        ];
+
+        return view('pages.uji.pre.view', $params);
+    }
+    function pre_proses($test_id)
+    {
+        $testing = Testing::all();
+        $data = TestingDetil::where('testing_id', $test_id)->get();
+        $dataset = TestingDetil::where('testing_id', $test_id)->get();
+        $preprocessing = NaiveBayesService::preprocessing($dataset, 1);
+
+        // echo json_encode($preprocessing);
+        // exit;
+
+        $params = [
+            'testing' => $testing,
+            'testing_id' => $test_id,
+            'data' => $data,
+            'pre' => $preprocessing,
+        ];
+
+        return view('pages.uji.pre.view', $params);
     }
 }

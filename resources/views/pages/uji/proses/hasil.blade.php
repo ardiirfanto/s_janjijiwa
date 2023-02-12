@@ -1,14 +1,14 @@
 @extends('app')
 
-@section('title', 'Hasil Pengujian')
+@section('title', 'Hasil Klasifikasi')
 @section('breadcumb')
     <li class="breadcrumb-item"><a href="javascript:void(0);">Pengujian</a></li>
     <li class="breadcrumb-item">
-        <a href="{{ route('uji.proses') }}">Proses
-            Pengujian
+        <a href="{{ route('uji.proses') }}">Proses Klasifikasi
+
         </a>
     </li>
-    <li class="breadcrumb-item active">Hasil Pengujian</li>
+    <li class="breadcrumb-item active">Hasil Klasifikasi</li>
 @endsection
 @section('content')
     {{-- Grafik --}}

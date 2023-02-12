@@ -1,15 +1,15 @@
 @extends('app')
 
-@section('title', 'Proses Klasifikasi')
+@section('title', 'Pre-Processing')
 @section('breadcumb')
     <li class="breadcrumb-item"><a href="javascript:void(0);">Pengujian</a></li>
-    <li class="breadcrumb-item active">Proses Klasifikasi</li>
+    <li class="breadcrumb-item active">Pre-Processing</li>
 @endsection
 @section('content')
     {{-- Form Testing --}}
     <div class="row">
         <div class="col-md-12">
-            <form action="{{ route('uji.proses.view') }}" method="post">
+            <form action="{{ route('uji.pre.view') }}" method="post">
                 @csrf
                 <div class="row">
                     <div class="col-md-3">
@@ -45,14 +45,13 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-6">
-                                    <h4 class="mt-0 header-title">Data Pre-Processing</h4>
+                                    <h4 class="mt-0 header-title">Data Testing dari Twitter</h4>
                                 </div>
                                 <div class="col-md-6">
-                                    <button
-                                        onclick="proses('{{ route('uji.proses.proses', ['testing_id' => $testing_id]) }}')"
+                                    <button onclick="proses('{{ route('uji.pre.proses', ['testing_id' => $testing_id]) }}')"
                                         type="button" class="btn btn-primary" style="float: right">
                                         <i class="fas fa-redo"></i>
-                                        Proses Klasifikasi
+                                        Lakukan Pre-Processing
                                     </button>
                                 </div>
                             </div>
@@ -64,11 +63,11 @@
                                     <th>USERNAME TWITTER</th>
                                 </thead>
                                 <tbody>
-                                    @foreach ($data['data'] as $key => $row)
+                                    @foreach ($data as $row)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $data['data'][$key] }}</td>
-                                            <td>{{ $data['username'][$key] }}</td>
+                                            <td>{{ $row->post }}</td>
+                                            <td>{{ $row->username_twitter }}</td>
                                         </tr>
                                     @endforeach
                                 </tbody>
@@ -79,14 +78,48 @@
             </div>
         @endif
     @endif
+
+    {{-- Data Pre-Processing --}}
+    @if (isset($pre))
+        <div class="row mt-3">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h4 class="mt-0 header-title">Data Pre-Processing</h4>
+                            </div>
+                        </div>
+                        <hr>
+                        <table class="table table-bordered">
+                            <thead>
+                                <th width="10%">NO</th>
+                                <th>POSTINGAN</th>
+                                <th>USERNAME TWITTER</th>
+                            </thead>
+                            <tbody>
+                                @foreach ($pre['data'] as $key => $row)
+                                    <tr>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $pre['data'][$key] }}</td>
+                                        <td>{{ $pre['username'][$key] }}</td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
 @endsection
 
 @push('page-js')
     <script>
         function proses(url) {
             Swal.fire({
-                title: 'Memproses Klasifikasi Naive Bayes',
-                text: 'Anda akan melakukan proses klasifikasi Naive Bayes. Lanjutkan?',
+                title: 'Lakukan Pre-Processing?',
+                text: 'Anda akan melakukan Pre-processing. Lanjutkan?',
                 icon: 'info',
                 showCancelButton: true,
                 confirmButtonText: 'Proses',
