@@ -21,6 +21,11 @@
     <link href="{{ asset('assets/css/icons.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet" type="text/css">
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        .tablepre td{
+            width: 100px
+        }
+    </style>
 </head>
 
 <body>
@@ -106,7 +111,9 @@
 
     <script>
         $(document).ready(function() {
-            $('.table').DataTable();
+            $('.table').DataTable({
+                scrollX: true
+            });
         });
     </script>
 </body>

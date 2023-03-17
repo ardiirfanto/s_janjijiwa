@@ -9,6 +9,7 @@ use Phpml\Tokenization\WordTokenizer;
 use Phpml\FeatureExtraction\StopWords;
 use Phpml\FeatureExtraction\TfIdfTransformer;
 use Sastrawi\Stemmer\StemmerFactory;
+use stdClass;
 
 class NaiveBayesService
 {
@@ -34,7 +35,7 @@ class NaiveBayesService
         return self::$classCounts[$class];
     }
 
-    public static function classify($text,$username,$testing_detil_id)
+    public static function classify($text, $username, $testing_detil_id)
     {
         $words = explode(" ", $text);
         $scores = array("positif" => 0, "negatif" => 0, "netral" => 0);
@@ -66,6 +67,8 @@ class NaiveBayesService
 
     static function preprocessing($data, $type = 0)
     {
+
+
         if ($type == 0) {
             $tokenizing = self::train_tokenizing($data);
 
@@ -80,7 +83,12 @@ class NaiveBayesService
                 'label' => $tokenizing['kategori']
             ];
         } else {
-            $tokenizing = self::classify_tokenizing($data);
+
+            $cleansing = self::cleansing($data);
+
+            $casefolding = self::casefolding($cleansing);
+
+            $tokenizing = self::classify_tokenizing($casefolding);
 
             $stemming = self::stemming($tokenizing['data']);
 
@@ -88,8 +96,20 @@ class NaiveBayesService
 
             $union = self::union($stopwords);
 
+            $pre_data = [
+                'cleansing' => $cleansing,
+                'casefolding' => $casefolding,
+                'tokenizing' => $tokenizing,
+                'stopwords' => $stopwords,
+                'stemming' => $stemming,
+                'union' => $union,
+            ];
+
+            $prepocessing = self::combine($pre_data);
+
             return [
-                'data' => $union,
+                'data' => $data,
+                'pre' => $prepocessing,
                 'username' => $tokenizing['username'],
                 'testing_detil_id' => $tokenizing['testing_detil_id'],
             ];
@@ -138,6 +158,44 @@ class NaiveBayesService
         ];
 
         return $data;
+    }
+
+    static function cleansing($data)
+    {
+        $arr = [];
+        foreach ($data as $row) {
+
+            $clean = self::cleanwords($row->post);
+
+            $temp = new stdClass;
+            $temp->id = $row->id;
+            $temp->testing_id = $row->testing_id;
+            $temp->post = $clean;
+            $temp->username_twitter = $row->username_twitter;
+
+            $arr[] = $temp;
+        }
+
+        return $arr;
+    }
+
+    static function casefolding($data)
+    {
+        $arr = [];
+        foreach ($data as $row) {
+
+            $lower = strtolower($row->post);
+
+            $temp = new stdClass;
+            $temp->id = $row->id;
+            $temp->testing_id = $row->testing_id;
+            $temp->post = $lower;
+            $temp->username_twitter = $row->username_twitter;
+
+            $arr[] = $temp;
+        }
+
+        return $arr;
     }
 
     static function stopwords($data)
@@ -198,6 +256,30 @@ class NaiveBayesService
         return $arr;
     }
 
+    static function combine($pre)
+    {
+
+        $count = count($pre['union']);
+
+        $arr = [];
+
+        for ($i = 0; $i < $count; $i++) {
+
+            $temp = new stdClass;
+            $temp->username = $pre['cleansing'][$i]->username_twitter;
+            $temp->cleansing = $pre['cleansing'][$i]->post;
+            $temp->casefolding = $pre['casefolding'][$i]->post;
+            $temp->tokenizing = json_encode($pre['tokenizing']['data'][$i]);
+            $temp->stopwords = json_encode($pre['stopwords'][$i]);
+            $temp->stemming = json_encode($pre['stemming'][$i]);
+            $temp->union = $pre['union'][$i];
+
+            $arr[] = $temp;
+        }
+
+        return $arr;
+    }
+
 
     // Private
     private static function removewords($arrtext, $arrstopwords)
@@ -213,5 +295,23 @@ class NaiveBayesService
         }
 
         return $newarr;
+    }
+
+    private static function cleanwords($text)
+    {
+
+        // Remove phone numbers
+        $text = preg_replace('/\d{3}-\d{3}-\d{4}/', '', $text);
+
+        // Remove email addresses
+        $text = preg_replace('/\S+@\S+\.\S+/', '', $text);
+
+        // Remove punctuation marks
+        $text = preg_replace('/[^\w\s]/', '', $text);
+
+        // Remove extra whitespace
+        $text = preg_replace('/\s+/', ' ', $text);
+
+        return $text;
     }
 }
