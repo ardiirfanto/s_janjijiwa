@@ -3,11 +3,9 @@
 namespace App\Services;
 
 use App\Models\KataDihilangkan;
-use Phpml\Classification\NaiveBayes;
-use Phpml\Preprocessing\Normalizer;
 use Phpml\Tokenization\WordTokenizer;
-use Phpml\FeatureExtraction\StopWords;
-use Phpml\FeatureExtraction\TfIdfTransformer;
+use Phpml\Metric\ConfusionMatrix;
+use Phpml\Metric\ClassificationReport;
 use Sastrawi\Stemmer\StemmerFactory;
 use stdClass;
 
@@ -17,6 +15,15 @@ class NaiveBayesService
     private static $classes = array("positif", "negatif", "netral");
     private static $vocabulary = array();
     private static $classCounts = array("positif" => 0, "negatif" => 0, "netral" => 0);
+
+    public static function confusion_matrix($true,$predicted){
+        return ConfusionMatrix::compute($true,$predicted);
+    }
+
+    public static function classification_report($true,$predicted){
+        $report = new ClassificationReport($true,$predicted);
+        return $report;
+    }
 
     public static function train($text, $class)
     {

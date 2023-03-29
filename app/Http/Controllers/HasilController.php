@@ -34,10 +34,11 @@ class HasilController extends Controller
         $testing = Testing::all();
         $dataset = TestingDetil::where('testing_id', $req->testing)->get();
         $data = NaiveBayesService::preprocessing($dataset, 1);
+        // dd($data['pre']);
         $params = [
             'testing' => $testing,
             'testing_id' => $req->testing,
-            'data' => $data
+            'data' => $data['pre']
         ];
 
         return view('pages.uji.proses.view', $params);
@@ -50,6 +51,9 @@ class HasilController extends Controller
         $datatraining = Training::all();
         $train_preprocessing = NaiveBayesService::preprocessing($datatraining);
 
+        $true_labels = [];
+        $predicted_labels = [];
+
         $arr_train = [];
         foreach ($train_preprocessing['data'] as $key =>  $row) {
             $row_train = [
@@ -61,13 +65,17 @@ class HasilController extends Controller
 
         foreach ($arr_train as $row) {
             NaiveBayesService::train($row['data'], $row['label']);
+
+            $predicted_labels[] = $row['label'];
         }
 
         $classify_preprocessing = NaiveBayesService::preprocessing($dataset, 1);
         $arr_classify = [];
+
+        // dd($classify_preprocessing);
         foreach ($classify_preprocessing['data'] as $key =>  $row) {
             $row_classify = [
-                "data" => $classify_preprocessing['data'][$key],
+                "data" => $classify_preprocessing['pre'][$key]->union,
                 "username" => $classify_preprocessing['username'][$key],
                 "testing_detil_id" => $classify_preprocessing['testing_detil_id'][$key],
             ];
@@ -82,8 +90,17 @@ class HasilController extends Controller
                 "kategori" => $classify['skor'],
             ];
 
+            $true_labels[] = strtolower($classify['skor']);
+
             $store = Hasil::updateOrInsert(['testing_detil_id' => $classify['testing_detil_id']], $hasil_classify);
         }
+
+        // $confusion_matrix = NaiveBayesService::confusion_matrix($true_labels,$predicted_labels);
+        $class_report = NaiveBayesService::classification_report($true_labels,$predicted_labels);
+
+        dd($class_report);
+
+        // dd($hasil_classify);
 
         if (!$store) {
             DB::rollBack();

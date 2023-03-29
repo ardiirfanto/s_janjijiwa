@@ -64,11 +64,11 @@
                                     <th>USERNAME TWITTER</th>
                                 </thead>
                                 <tbody>
-                                    @foreach ($data['data'] as $key => $row)
+                                    @foreach ($data as $key => $row)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $data['data'][$key] }}</td>
-                                            <td>{{ $data['username'][$key] }}</td>
+                                            <td>{{ $row->union }}</td>
+                                            <td>{{ $row->username }}</td>
                                         </tr>
                                     @endforeach
                                 </tbody>
