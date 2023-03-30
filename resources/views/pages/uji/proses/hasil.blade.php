@@ -86,6 +86,42 @@
             </div>
         </div>
     </div>
+
+    {{-- Confusion Matrix --}}
+    <div class="row mt-2">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h4 class="mt-0 header-title">Confusion Matrix | {{ $testing->nama_testing }}</h4>
+                        </div>
+                    </div>
+                    <hr>
+                    <table class="table table-bordered">
+                        <thead>
+                            <th>LABEL</th>
+                            <th>PRECISION</th>
+                            <th>RECALL</th>
+                            <th>F1-SCORE</th>
+                            <th>SUPPORT</th>
+                        </thead>
+                        <tbody>
+                            @foreach ($report as $key => $row)
+                                <tr>
+                                    <td>{{ $key }}</td>
+                                    <td>{{ $row['precision'] }}</td>
+                                    <td>{{ $row['recall'] }}</td>
+                                    <td>{{ $row['f1score'] }}</td>
+                                    <td>{{ $row['support'] ?? '-' }}</td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @push('page-js')
@@ -97,7 +133,7 @@
                 "Netral"
             ],
             datasets: [{
-                data: [{{ $positif }}, {{ $negatif }},{{ $netral }}],
+                data: [{{ $positif }}, {{ $negatif }}, {{ $netral }}],
                 backgroundColor: [
                     "#02AC7B",
                     "#FC3B3B",

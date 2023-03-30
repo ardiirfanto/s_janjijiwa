@@ -96,9 +96,9 @@ class HasilController extends Controller
         }
 
         // $confusion_matrix = NaiveBayesService::confusion_matrix($true_labels,$predicted_labels);
-        $class_report = NaiveBayesService::classification_report($true_labels,$predicted_labels);
+        $class_report = NaiveBayesService::classification_report($true_labels, $predicted_labels);
 
-        dd($class_report);
+        $report = base64_encode(json_encode($class_report));
 
         // dd($hasil_classify);
 
@@ -110,10 +110,10 @@ class HasilController extends Controller
 
         DB::commit();
         alert()->success('Berhasil Melakukan Klasifikasi');
-        return redirect()->route('uji.proses.hasil', ['testing_id' => $test_id]);
+        return redirect()->route('uji.proses.hasil', ['testing_id' => $test_id, 'report' => $report]);
     }
 
-    function hasil($test_id)
+    function hasil($test_id, $report)
     {
 
         $testing = Testing::find($test_id);
@@ -138,12 +138,18 @@ class HasilController extends Controller
             ->where('b.kategori', 'Netral')
             ->count();
 
+        $decode_report = base64_decode($report);
+        $json_report = json_decode($decode_report,true);
+
+        // dd($json_report['positif']['precision']);
+
         $params = [
             'testing' => $testing,
             'data' => $data,
             'positif' => $positif,
             'negatif' => $negatif,
             'netral' => $netral,
+            'report' => $json_report
         ];
 
         return view('pages.uji.proses.hasil', $params);

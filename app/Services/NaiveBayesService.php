@@ -22,7 +22,30 @@ class NaiveBayesService
 
     public static function classification_report($true,$predicted){
         $report = new ClassificationReport($true,$predicted);
-        return $report;
+
+        $arr = [
+            'positif' => [
+                'precision' => $report->getPrecision()['positif'],
+                'recall' => $report->getRecall()['positif'],
+                'f1score' => $report->getF1score()['positif'],
+                'support' => $report->getSupport()['positif'],
+            ],
+            'negatif' => [
+                'precision' => $report->getPrecision()['negatif'],
+                'recall' => $report->getRecall()['negatif'],
+                'f1score' => $report->getF1score()['negatif'],
+                'support' => $report->getSupport()['negatif'],
+            ],
+            'netral' => [
+                'precision' => $report->getPrecision()['netral'],
+                'recall' => $report->getRecall()['netral'],
+                'f1score' => $report->getF1score()['netral'],
+                'support' => $report->getSupport()['netral'],
+            ],
+            'average' => $report->getAverage()
+        ];
+
+        return $arr;
     }
 
     public static function train($text, $class)
